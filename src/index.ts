@@ -8,8 +8,10 @@ interface EncryptedCharacter {
   value: string;
   color: 'green' | 'red';
 }
-const _green = '\x1b[32m';
-const _red = '\x1b[31m';
+const colorValues = {
+  green: '\x1b[32m',
+  red: '\x1b[31m',
+};
 type EncryptedAlphabetMap = Record<string, EncryptedCharacter>;
 
 function main() {
@@ -40,13 +42,18 @@ function main() {
 
   // console.log(encryptedAlphabetMap);
 
-  const encryptedMessage = message
-    .split('')
-    .map((char) =>
-      char in encryptedAlphabetMap ? encryptedAlphabetMap[char] : char,
-    );
+  const _encryptedMessage = message.split('').map((char) => {
+    const result =
+      char in encryptedAlphabetMap ? encryptedAlphabetMap[char] : char;
+    if (typeof result === 'string') {
+      process.stdout.write(result);
+    } else {
+      process.stdout.write(colorValues[result.color] + result.value);
+    }
+    return result;
+  });
   // console.log(encryptedMessage)
-  Bun.write('encrypted.json', JSON.stringify(encryptedMessage));
+  // Bun.write('encrypted.json', JSON.stringify(encryptedMessage));
 }
 
 main();
