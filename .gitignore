@@ -291,3 +291,6 @@ dist
 .DS_Store
 
 >>>>>>> 4ccc9ce (feat: add base project configuration)
+
+secret-message
+encrypted.json
