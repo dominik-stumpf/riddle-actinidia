@@ -40,9 +40,7 @@ function main() {
     }
   }
 
-  // console.log(encryptedAlphabetMap);
-
-  const _encryptedMessage = message.split('').map((char) => {
+  message.split('').map((char) => {
     const result =
       char in encryptedAlphabetMap ? encryptedAlphabetMap[char] : char;
     if (typeof result === 'string') {
@@ -52,8 +50,6 @@ function main() {
     }
     return result;
   });
-  // console.log(encryptedMessage)
-  // Bun.write('encrypted.json', JSON.stringify(encryptedMessage));
 }
 
 main();
